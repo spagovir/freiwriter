@@ -14,16 +14,32 @@ class App extends Component {
     return (
         <div className="App">
           <div className="Paper">
-            {this.state.value}
+            <pre>
+              {this.state.value}<span>|</span>
+            </pre>
           </div>
         </div>
     );
   }
   type(e) {
-    const ASCII_SPACE = 0x20, ASCII_DEL = 0x7f;
+
+    const ASCII_BACKSPACE = 0x08, ASCII_DEL = 0x7f;
+    //character expanding function for linebreak formatting.
+    var expandChar = function(ch) {
+      const NEWLINE = '\r\n';
+      switch(ch) {
+        case '\r':
+          return NEWLINE;
+        case '\n':
+          return NEWLINE;
+        default:
+          return ch;
+      }
+    }
+
     var ch = e.which;
-    if(ch >= ASCII_SPACE && ch != ASCII_DEL) // checks that ch is in printable range and not delete.
-      this.setState({value: this.state.value + String.fromCharCode(ch)});
+    if(ch != ASCII_BACKSPACE && ch != ASCII_DEL) // checks that ch is in printable range and not delete.
+      this.setState({value: this.state.value + expandChar(String.fromCharCode(ch))});
     e.preventDefault();
   }
   componentWillMount() {

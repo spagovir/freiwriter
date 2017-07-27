@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -8,15 +7,14 @@ class App extends Component {
     this.state = {
       value: "",
     };
+    this.delay = null;
     this.type = this.type.bind(this);
   }
   render() {
     return (
         <div className="App">
           <div className="Paper">
-            <pre>
               {this.state.value}<span>|</span>
-            </pre>
           </div>
         </div>
     );
@@ -38,9 +36,22 @@ class App extends Component {
     }
 
     var ch = e.which;
-    if(ch != ASCII_BACKSPACE && ch != ASCII_DEL) // checks that ch is in printable range and not delete.
-      this.setState({value: this.state.value + expandChar(String.fromCharCode(ch))});
+    if(ch != ASCII_BACKSPACE && ch != ASCII_DEL) { // checks that ch is in printable range and not delete.
+      this.setState((prevState, props) => ({value: prevState.value + expandChar(String.fromCharCode(ch))}));
+      clearTimeout(this.delay);
+      this.delay = setTimeout(this.curriedAutoType(0),500);
+    }
     e.preventDefault();
+  }
+  //returns a function callback that types one letter and registers the timer callback to type the next letter.
+  curriedAutoType(index) {
+    var that = this;
+    var text = "Eheu! Scribere non potest! ";
+    index = index % text.length;
+    return function() {
+      that.setState((prevState, props) => ({value: prevState.value + text.charAt(index)}));
+      that.delay = setTimeout(that.curriedAutoType(index + 1), 150);
+    }
   }
   componentWillMount() {
     document.addEventListener("keypress", this.type, false);

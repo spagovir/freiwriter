@@ -39,7 +39,7 @@ class App extends Component {
     if(ch != ASCII_BACKSPACE && ch != ASCII_DEL) { // checks that ch is in printable range and not delete.
       this.setState((prevState, props) => ({value: prevState.value + expandChar(String.fromCharCode(ch))}));
       clearTimeout(this.delay);
-      this.delay = setTimeout(this.curriedAutoType(0),500);
+      this.delay = setTimeout(this.curriedAutoType(0),800);
     }
     e.preventDefault();
   }
@@ -50,7 +50,7 @@ class App extends Component {
     index = index % text.length;
     return function() {
       that.setState((prevState, props) => ({value: prevState.value + text.charAt(index)}));
-      that.delay = setTimeout(that.curriedAutoType(index + 1), 150);
+      that.delay = setTimeout(that.curriedAutoType(index + 1), 100);
     }
   }
   componentWillMount() {

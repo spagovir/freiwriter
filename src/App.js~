@@ -39,14 +39,15 @@ class App extends Component {
     if(ch != ASCII_BACKSPACE && ch != ASCII_DEL) { // checks that ch is in printable range and not delete.
       this.setState((prevState, props) => ({value: prevState.value + expandChar(String.fromCharCode(ch))}));
       clearTimeout(this.delay);
-      this.delay = setTimeout(this.curriedAutoType(0),1000);
+      this.delay = setTimeout(this.curriedAutoType(0),1500);
     }
-    e.preventDefault();
+    window.scrollTo(0, document.body.scrollHeight);
+    e.preventDefault();//prevents the default action triggered by the keypress from occurring. I think this is only meant to stop people from accidentally going back to the previous page by pressing backspace, but i forgot to doc this when I first wrote this fml.
   }
   //returns a function callback that types one letter and registers the timer callback to type the next letter.
   curriedAutoType(index) {
     var that = this;
-    var text = "Eheu! Scribere non potest! ";
+    var text = "erm... ";
     index = index % text.length;
     return function() {
       that.setState((prevState, props) => ({value: prevState.value + text.charAt(index)}));

@@ -11,6 +11,11 @@
   font-family: "Lucida Console", Monaco, monospace;
   margin: auto;
   width: 148mm;
+  word-break: break-all;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 }
 
 .App-logo {

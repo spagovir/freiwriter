@@ -14,7 +14,7 @@ class App extends Component {
     return (
         <div className="App">
           <div className="Paper">
-              > {this.state.value}<span>|</span>
+              {this.state.value}<span>|</span>
           </div>
         </div>
     );
@@ -55,7 +55,7 @@ class App extends Component {
   //returns a function callback that types one letter and registers the timer callback to type the next letter.
   curriedAutoType(index) {
     var that = this;
-    var text = "erm... ";
+    var text = "... ";
     index = index % text.length;
     return function() {
       that.addCharS(text.charAt(index));

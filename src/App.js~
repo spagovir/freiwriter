@@ -14,7 +14,7 @@ class App extends Component {
     return (
         <div className="App">
           <div className="Paper">
-              > {this.state.value}<span>|</span>
+              {this.state.value}<span>|</span>
           </div>
         </div>
     );

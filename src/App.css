@@ -1,7 +1,6 @@
 .App {
   text-align: left;
   min-height: 100vh;
-  width: 100%;
   background-color: #000000;
 }
 
@@ -9,6 +8,10 @@
   white-space: pre-wrap;
   color: #ffffff;
   padding: 1px;
+  font-family: "Lucida Console", Monaco, monospace;
+  margin: auto;
+  width: 148mm;
+  overflow-wrap: break-word;
 }
 
 .App-logo {
